@@ -1,6 +1,6 @@
 <template>
     <ui-header></ui-header>
-    <div class="audio">
+    <div class="audio" :is-play='isPlay?"yes":"no"'>
 
         <!-- 播放器 -->
         <audio :src="audioSrc" id='audio'></audio>
@@ -19,6 +19,10 @@
                 暂停
             </button>
             <span class="filename">{{filename}}</span>
+        </div>
+
+        <div class="caption">
+            无歌词
         </div>
 
     </div>
@@ -62,14 +66,14 @@
         width: 100vw;
         min-height: calc(100vh - 167px);
         background-color: #d5d3d4;
-        line-height: calc(100vh - 167px);
         text-align: center;
+        padding: 20px;
 
         &>.controls {
             line-height: 50px;
             display: inline-block;
             width: 700px;
-            background-color: white;
+            background-color: black;
             text-align: left;
 
             &>* {
@@ -94,6 +98,7 @@
                     background-position: center center;
                     background-size: 80% auto;
                     border-right: 1px solid #d5d3d4;
+                    cursor: pointer;
                 }
             }
 
@@ -104,17 +109,37 @@
                 outline: none;
                 border: none;
                 cursor: pointer;
+                background-size: 100% auto;
+                font-size: 0;
+
+                &.play {
+                    background-image: url('./assets/start.png');
+                }
+
+                &.pause {
+                    background-image: url('./assets/pause.png');
+                }
             }
 
             &>.filename {
                 float: right;
                 padding-right: 10px;
-                color: red;
+                color: white;
             }
 
             &>[is-hidden='yes'] {
                 display: none;
             }
+        }
+
+        &>.caption {
+            background-color: white;
+            width: 700px;
+            display: inline-block;
+            min-height: calc(100vh - 257px);
+            line-height: calc(100vh - 257px);
+            font-size: 40px;
+            color: #d5d3d4;
         }
     }
 </style>
