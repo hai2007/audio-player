@@ -2,6 +2,25 @@
     <ui-header></ui-header>
     <div class="audio">
 
+        <!-- 播放器 -->
+        <audio :src="audioSrc" id='audio'></audio>
+
+        <div class="controls">
+            <div class="open">
+                <label for="file" title='点击我选择打开的音频'>
+                    选择音频
+                </label>
+                <input type="file" @change='selectAudio()' accept="audio/*" id='file'>
+            </div>
+            <button @click='doPlay' class='play' :is-hidden='isPlay?"yes":"no"'>
+                播放
+            </button>
+            <button @click='doPause' class='pause' :is-hidden='isPlay?"no":"yes"'>
+                暂停
+            </button>
+            <span class="filename">{{filename}}</span>
+        </div>
+
     </div>
     <ui-footer></ui-footer>
 </template>
@@ -12,7 +31,9 @@
     export default {
         data() {
             return {
-
+                audioSrc: "",
+                isPlay: false,
+                filename: "未选择任何歌曲"
             };
         },
         component: {
@@ -20,7 +41,19 @@
             uiFooter
         },
         methods: {
-
+            selectAudio() {
+                this.audioSrc = window.URL.createObjectURL(document.getElementById('file').files[0]);
+                this.filename = document.getElementById('file').files[0].name;
+                this.isPlay = false;
+            },
+            doPlay() {
+                document.getElementById('audio').play();
+                this.isPlay = true;
+            },
+            doPause() {
+                document.getElementById('audio').pause();
+                this.isPlay = false;
+            }
         }
     };
 </script>
@@ -29,5 +62,59 @@
         width: 100vw;
         min-height: calc(100vh - 167px);
         background-color: #d5d3d4;
+        line-height: calc(100vh - 167px);
+        text-align: center;
+
+        &>.controls {
+            line-height: 50px;
+            display: inline-block;
+            width: 700px;
+            background-color: white;
+            text-align: left;
+
+            &>* {
+                vertical-align: top;
+            }
+
+            &>.open {
+                display: inline-block;
+
+                &>input {
+                    display: none;
+                }
+
+                &>label {
+                    font-size: 0;
+                    width: 50px;
+                    height: 50px;
+                    display: inline-block;
+                    vertical-align: top;
+                    background-image: url('./assets/logo.png');
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: 80% auto;
+                    border-right: 1px solid #d5d3d4;
+                }
+            }
+
+            &>button {
+                height: 50px;
+                width: 50px;
+                background-color: transparent;
+                outline: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            &>.filename {
+                float: right;
+                padding-right: 10px;
+                color: red;
+            }
+
+            &>[is-hidden='yes'] {
+                display: none;
+            }
+        }
     }
 </style>
