@@ -1,0 +1,33 @@
+<template>
+    <ui-header></ui-header>
+    <div class="audio">
+
+    </div>
+    <ui-footer></ui-footer>
+</template>
+<script>
+    import uiHeader from './components/ui-header.paper';
+    import uiFooter from './components/ui-footer.paper';
+
+    export default {
+        data() {
+            return {
+
+            };
+        },
+        component: {
+            uiHeader,
+            uiFooter
+        },
+        methods: {
+
+        }
+    };
+</script>
+<style>
+    .audio {
+        width: 100vw;
+        min-height: calc(100vh - 167px);
+        background-color: #d5d3d4;
+    }
+</style>
