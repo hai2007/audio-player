@@ -93,7 +93,7 @@
                     height: 50px;
                     display: inline-block;
                     vertical-align: top;
-                    background-image: url('./assets/logo.png');
+                    background-image: url('./image/logo.png');
                     background-repeat: no-repeat;
                     background-position: center center;
                     background-size: 80% auto;
@@ -113,11 +113,11 @@
                 font-size: 0;
 
                 &.play {
-                    background-image: url('./assets/start.png');
+                    background-image: url('./image/start.png');
                 }
 
                 &.pause {
-                    background-image: url('./assets/pause.png');
+                    background-image: url('./image/pause.png');
                 }
             }
 
